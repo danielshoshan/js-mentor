@@ -1,13 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
+import { Navigate } from 'react-router-dom'; // Import Navigate for redirection
 
 const CodeBlockPage = () => {
     const { id } = useParams();
     const [role, setRole] = useState('student');
     const [code, setCode] = useState('');
     const [socket, setSocket] = useState(null);
+    const [redirectToLobby, setRedirectToLobby] = useState(false);
 
     useEffect(() => {
         // Simulate role setting (Tom is the mentor)
@@ -36,18 +37,27 @@ const CodeBlockPage = () => {
             socket.emit('code-change', newCode);
         }
         if (newCode === 'solution code') {
-            alert('Congratulations! Youve solved it!');
-    }
+            alert('Congratulations! You solved it!');
+        }
     };
+
+    const handleLeaveRoom = () => {
+        setRedirectToLobby(true);
+        setCode('');
+    };
+
+    if (redirectToLobby) {
+        return <Navigate to="/" />;
+    }
 
     return (
         <div>
             <h1>Code Block {id}</h1>
             <p>Role: {role}</p>
             <textarea value={code} onChange={(e) => handleCodeChange(e.target.value)} />
+            <button onClick={handleLeaveRoom}>Leave Room</button>
         </div>
     );
 };
 
 export default CodeBlockPage;
-
