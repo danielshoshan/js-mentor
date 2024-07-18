@@ -12,7 +12,7 @@ const CodeBlockPage = () => {
     useEffect(() => {
         // Simulate role setting (Tom is the mentor)
         if (role === 'student') {
-            setSocket(io('http://localhost:5000'));
+            setSocket(io('http://localhost:5001'));
         }
         return () => {
             if (socket) {
