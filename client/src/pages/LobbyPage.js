@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 const LobbyPage = () => {
     return (
         <div>
-            <h1>Choose code block</h1>
+            <h1>Welcome to JS Mentor</h1>
+            <h2>Choose code block</h2>
             <ul>
                 <li><Link to="/codeblock/1">Array Methods</Link></li>
                 <li><Link to="/codeblock/2">Closure Scope</Link></li>
